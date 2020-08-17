@@ -105,13 +105,14 @@ def temp(start, end):
                        filter(Measurement.date >= start).filter(Measurement.date <= end).first()
     session.close()
 
-    return (
-        f"From {start} to {end}<br/>"
-        f"=======================<br/>"
-        f"Min. Temperature: {tmin}<br/>"
-        f"Max. Temperature: {tmax}<br/>"
-        f"Avg. Temperature: {round(tavg, 2)}<br/>"
-    )
+    dict = {"Start Date": start,
+            "End Date": end,
+            "The Lowest Temperature": tmin,
+            "The Highest Temperature": tmax,
+            "Average Temperature": round(tavg, 2)
+    }
+
+    return jsonify(dict)
 
 
 if __name__ == "__main__":
